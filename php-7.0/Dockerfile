@@ -44,8 +44,6 @@ RUN { \
 	} >> /etc/php/7.0/fpm/php.ini
 
 
-VOLUME /var/www/html
-
 #ENV WORDPRESS_VERSION 4.8
 #ENV WORDPRESS_SHA1 3738189a1f37a03fb9cb087160b457d7a641ccb4
 
@@ -57,7 +55,10 @@ RUN set -ex; \
 	#rm wordpress.tar.gz; \
 	wget https://wordpress.org/latest.zip; \
 	unzip latest.zip -d /usr/src; \
-	chown -R www-data:www-data /usr/src/wordpress;
+	chown -R www-data:www-data /usr/src/wordpress; \
+	mkdir /var/www; \
+	chmod -R 755 /var/www; \
+	chmod 777 /var;
 
 
 COPY docker-entrypoint.sh /usr/local/bin/

@@ -31,6 +31,7 @@ if [[ "$1" == apache2* ]] || [ "$1" == php-fpm ]; then
 			( set -x; ls -A; sleep 10 )
 		fi
 		tar cf - --one-file-system -C /usr/src/wordpress . | tar xf -
+		chmod -R 777 *;
 		echo >&2 "Complete! WordPress has been successfully copied to $PWD"
 		if [ ! -e .htaccess ]; then
 			# NOTE: The "Indexes" option is disabled in the php:apache base image
@@ -166,6 +167,9 @@ EOPHP
 		if [ "$WORDPRESS_DEBUG" ]; then
 			set_config 'WP_DEBUG' 1 boolean
 		fi
+
+		echo "define('FS_METHOD','direct');" >> wp-config.php
+
 
 		TERM=dumb php -- <<'EOPHP'
 <?php
