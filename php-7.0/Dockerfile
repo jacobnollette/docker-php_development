@@ -40,12 +40,9 @@ RUN { \
 
 RUN { \
 		echo 'log_errors = On'; \
+		echo 'display_errors = On'; \
 		echo 'error_reporting = E_ALL'; \
 	} >> /etc/php/7.0/fpm/php.ini
-
-
-#ENV WORDPRESS_VERSION 4.8
-#ENV WORDPRESS_SHA1 3738189a1f37a03fb9cb087160b457d7a641ccb4
 
 
 
